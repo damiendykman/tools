@@ -1,0 +1,17 @@
+[user]
+	name = Damien Dykman
+	email = ddykman@skillz.com
+[alias]
+	co = checkout
+	ss = stash save
+	sp = stash pop
+        br = branch --sort=-committerdate
+        di = difftool --dir-diff
+	l = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+        empty = commit -m Empty --allow-empty
+[merge]
+	tool = meld
+[diff]
+	guitool = meld
+[diff "sopsdiffer"]
+	textconv = sops -d
