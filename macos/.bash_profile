@@ -107,7 +107,8 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
-############# Virtualenv ##################
+#################################################
+# Virtualenv
 
 function venv-list {
   ls ~/tmp/venvs/
@@ -142,4 +143,19 @@ function venv-delete {
   echo "Done deleteing venv $1"
 }
 
+#################################################
+# Python stuff
+
+function python-black-flake8 {
+  black *.py tests/*.py
+  flake8 *.py tests/*.py
+}
+
+#################################################
+# Docker
+
+# Remove exited containers
+function docker-rm () { 
+    docker ps -a -f status=exited | grep -v "^CONTAINER" | cut -f1 -d ' ' | xargs docker rm
+}
 
