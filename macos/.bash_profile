@@ -91,6 +91,8 @@ alias k='kubectl'
 alias kc='kubectl config get-contexts'
 alias saml='saml2aws login --session-duration=43200'
 alias dc='docker-compose'
+alias jyq='jq -c . | yq eval -P -'
+alias yjq='yq eval -o=json'
 
 #################################################
 # Some random stuff
@@ -146,9 +148,10 @@ function venv-delete {
 #################################################
 # Python stuff
 
-function python-black-flake8 {
+function python-clean {
   black *.py tests/*.py
   flake8 *.py tests/*.py
+  isort *.py tests/*.py
 }
 
 #################################################
@@ -158,4 +161,7 @@ function python-black-flake8 {
 function docker-rm () { 
     docker ps -a -f status=exited | grep -v "^CONTAINER" | cut -f1 -d ' ' | xargs docker rm
 }
+
+# Turn off bell
+bind 'set bell-style none'
 
