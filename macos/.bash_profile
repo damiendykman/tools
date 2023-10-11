@@ -154,6 +154,29 @@ function python-clean {
   isort *.py tests/*.py
 }
 
+function python-clean-recursive {
+  find . -name '*.py' | xargs black
+  find . -name '*.py' | xargs flake8
+  find . -name '*.py' | xargs isort
+}
+
+function python-path-append {
+    if [ -z "$1" ]; then
+    /bin/echo "Missing path"
+    return 1  
+  fi
+  if [ -z "$PYTHONPATH" ]; then
+    export PYTHONPATH="$1"
+  else
+    export PYTHONPATH="$PYTHONPATH:$1"
+  fi
+  echo PYTHONPATH=$PYTHONPATH
+}
+
+function python-path-reset {
+  unset PYTHONPATH
+}
+
 #################################################
 # Docker
 
