@@ -5,6 +5,7 @@
 	co = checkout
 	ss = stash save
 	sp = stash pop
+        st = status --untracked-file=no
         br = branch --sort=-committerdate
         di = difftool --dir-diff
 	l = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
