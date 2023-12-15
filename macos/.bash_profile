@@ -90,15 +90,17 @@ alias mvnci='mvn clean install -DskipTests=true'
 alias k='kubectl'
 alias kc='kubectl config get-contexts'
 alias saml='saml2aws login --session-duration=43200'
-alias dc='docker-compose'
+alias dc='docker compose'
+alias dcub='docker compose up --build'
 alias jyq='jq -c . | yq eval -P -'
 alias yjq='yq eval -o=json'
+alias mypy='mypy --ignore-missing-imports'
 
 #################################################
 # Some random stuff
 
 # Reload .bash_profile and secrets
-function bash-reload-profile {
+function bp-reload {
   source ~/.bash_profile
 }
 
@@ -110,7 +112,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 #################################################
-# Virtualenv
+# Python Virtualenv
 
 function venv-list {
   ls ~/tmp/venvs/
@@ -141,20 +143,15 @@ function venv-delete {
     return 1  
   fi
   read -p "Delete venv $1?" yesno
-  rm -rf "~/tmp/venvs/$1" 
-  echo "Done deleteing venv $1"
+  rm -rf ~/tmp/venvs/"$1"
+  echo "Done deleting venv $1"
 }
 
 #################################################
-# Python stuff
+# More Python stuff
+
 
 function python-clean {
-  black *.py tests/*.py
-  flake8 *.py tests/*.py
-  isort *.py tests/*.py
-}
-
-function python-clean-recursive {
   find . -name '*.py' | xargs black
   find . -name '*.py' | xargs flake8
   find . -name '*.py' | xargs isort
@@ -176,6 +173,8 @@ function python-path-append {
 function python-path-reset {
   unset PYTHONPATH
 }
+
+python-path-append ~/git/TCLabs-Systems/tc
 
 #################################################
 # Docker
